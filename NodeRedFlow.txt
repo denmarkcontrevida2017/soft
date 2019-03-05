@@ -1,0 +1,476 @@
+[
+    {
+        "id": "c4b5a3e8.831b48",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "dbf26946.01bbd8",
+        "type": "websocket in",
+        "z": "c4b5a3e8.831b48",
+        "name": "",
+        "server": "dfe9555c.80aee",
+        "client": "",
+        "x": 140,
+        "y": 180,
+        "wires": [
+            [
+                "1453834d.2ad455",
+                "2faa8a63.70f1fe"
+            ]
+        ]
+    },
+    {
+        "id": "1453834d.2ad455",
+        "type": "debug",
+        "z": "c4b5a3e8.831b48",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 470,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "2faa8a63.70f1fe",
+        "type": "function",
+        "z": "c4b5a3e8.831b48",
+        "name": "InterruptHandler",
+        "func": "m=msg.payload.split(\";\");\nif(m[0]==\"cVal\"){\n    msg.coins=m[1];\n    if(m[1]>=10){\n        msg.payload=\"display:inline\";\n    }\n\n}\nelse if(m[0]==\"hideAll\"){\n    msg.payload=\"display:none\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 190,
+        "y": 300,
+        "wires": [
+            [
+                "52510439.e47bfc",
+                "3ba0446d.626494",
+                "9d8d43ca.1a4bd",
+                "76e36f7e.948868"
+            ]
+        ]
+    },
+    {
+        "id": "52510439.e47bfc",
+        "type": "debug",
+        "z": "c4b5a3e8.831b48",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "coins",
+        "x": 470,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "f0aa6dc6.c75bc8",
+        "type": "ui_text",
+        "z": "c4b5a3e8.831b48",
+        "group": "29eaea85.51c1f6",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Connect to the hotspot named \"ProjectWiFi\" and press Next",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 300,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "cfd21302.786058",
+        "type": "ui_template",
+        "z": "c4b5a3e8.831b48",
+        "group": "c2e8423f.0d0b98",
+        "name": "",
+        "order": 2,
+        "width": "16",
+        "height": "12",
+        "format": "<div ng-bind-html=\"msg.payload\"></div>\n<style>\n   .animation * {\n   box-sizing: border-box;\n}\n.animation-text {\n   font-size: 24px;\n   font-family: arial;\n   color: #bcbbbb;\n   text-align: center;\n   margin-bottom: 250px;\n}\n.animation {\n   position: relative;\n   box-sizing: border-box;\n   height: 176px;\n   width: 283px;\n   margin: 90px auto 50px;\n}\n.user::before {\n   content: '';\n   display: block;\n   position: absolute;\n   top: 10px;\n   left: 14px;\n   height: 10px;\n   width: 10px;\n   background-color: #fff;\n   border-radius: 666px;\n}\n.user::after {\n   content: '';\n   display: block;\n   position: absolute;\n   top: 21px;\n   left: 10px;\n   height: 8px;\n   width: 18px;\n   background-color: #ffffff;\n   border-radius: 6px 6px 0 0;\n}\n.user {\n   width: 38px;\n   height: 38px;\n   position: absolute;\n   z-index: 2;\n   background-color: #cccccc;\n   border-radius: 300px;\n   /*animation parameters*/\n   animation: user-animation ease-in 1s;\n   animation-iteration-count: 1;\n   transform-origin: 50% 50%;\n   animation-fill-mode: forwards;\n   animation-delay: 3s;\n}\n\n@keyframes user-animation {\n   0% {background-color: #cccccc;}\n   100% {background-color: #78be20;}\n}\n.user1 {\n   top: 61%;\n   left: 43%;\n   background-color: #78be20;\n   animation: none;\n}\n.user2 {\n   top: 71%;\n   left: 16%;\n}\n.user3 {\n   top: 79%;\n   left: 70%;\n}\n.user4 {\n   top: 1%;\n   left: 17%;\n}\n.user5 {\n   top: 0%;\n   left: 74%;\n}\n.user6 {\n   top: 36%;\n   left: 0%;\n}\n.user7 {\n   top: 16%;\n   left: 39%;\n}\n.user8 {\n   top: 37%;\n   right: 0;\n}\n.user6, .user7, .user8 {\n   animation-delay: 6s;\n}\n/* LINES */\n.line {\n   position: absolute;\n   height: 2px;\n   width: 50%;\n   background-color: #cccccc;\n   transform-origin: 50% 50%;\n   transform: rotate(0deg);\n   z-index: 1;\n}\n.line::before {\n   content: '';\n   display: block;\n   position: absolute;\n   top: 0;\n   right: 0;\n   bottom: 0;\n   height: 100%;\n   width: 0%;\n   background-color: #78be20;\n   /*animation parameters*/\n   animation: line-animation ease-in-out 1s;\n   animation-iteration-count: 1;\n   transform-origin: 50% 50%;\n   animation-fill-mode: forwards;\n   animation-delay: 5s;\n}\n@keyframes line-animation {\n   0% {width: 0%;}\n   100% {width: 100%;}\n}\n.line1::before,.line2::before,.line3::before,.line4::before {\n   animation-delay: 2s;\n}\n.line1 {\n   top: 76%;\n   left: 21%;\n   width: 30%;\n   transform: rotate(-13deg);\n}\n.line2 {\n   top: 80%;\n   left: 48%;\n   width: 30%;\n   transform: rotate(-156deg);\n}\n.line3 {\n   top: 42%;\n   left: 13%;\n   width: 47%;\n   transform: rotate(56deg);\n}\n.line4 {\n   top: 41%;\n   left: 43%;\n   width: 48%;\n   transform: rotate(129deg);\n}\n.line5 {\n   top: 59%;\n   left: 5%;\n   width: 47%;\n   transform: rotate(23deg);\n}\n.line6 {\n   top: 59%;\n   left: 47%;\n   width: 47%;\n   transform: rotate(158deg);\n}\n.line7 {\n   top: 64%;\n   left: -2%;\n   width: 30%;\n   transform: rotate(55deg);\n}\n.line8 {\n   top: 47%;\n   left: 0%;\n   width: 46%;\n   transform: rotate(95deg);\n}\n.line9 {\n   top: 53%;\n   left: 11%;\n   width: 46%;\n   transform: rotate(125deg);\n}\n.line10 {\n   top: 19%;\n   left: 44%;\n   width: 38%;\n   transform: rotate(165deg);\n}\n.line11 {\n   top: 59%;\n   left: 39%;\n   width: 47%;\n   transform: rotate(53deg);\n}\n.line12 {\n   top: 20%;\n   left: 22%;\n   width: 24%;\n   transform: rotate(-151deg);\n}\n.line13 {\n   top: 50%;\n   left: 54%;\n   width: 50%;\n   transform: rotate(94deg);\n}\n.line14 {\n   top: 68%;\n   left: 70%;\n   width: 32%;\n   transform: rotate(124deg);\n}\n\n   </style>\n<div class=\"animation\">\n   <div class=\"user user1\"></div>\n   <div class=\"user user2\"></div>\n   <div class=\"user user3\"></div>\n   <div class=\"user user4\"></div>\n   <div class=\"user user5\"></div>\n   <div class=\"user user6\"></div>\n   <div class=\"user user7\"></div>\n   <div class=\"user user8\"></div>\n\n   <div class=\"line line1\"></div>\n   <div class=\"line line2\"></div>\n   <div class=\"line line3\"></div>\n   <div class=\"line line4\"></div>\n   <div class=\"line line5\"></div>\n   <div class=\"line line6\"></div>\n   <div class=\"line line7\"></div>\n   <div class=\"line line8\"></div>\n   <div class=\"line line9\"></div>\n   <div class=\"line line10\"></div>\n   <div class=\"line line11\"></div>\n   <div class=\"line line12\"></div>\n   <div class=\"line line13\"></div>\n   <div class=\"line line14\"></div>\n</div>\n<header class=\"animation-text\">Project Coin WiFi PH</header>\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 640,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f49776ae.170908",
+        "type": "ui_button",
+        "z": "c4b5a3e8.831b48",
+        "name": "",
+        "group": "c2e8423f.0d0b98",
+        "order": 3,
+        "width": "4",
+        "height": "4",
+        "passthru": false,
+        "label": "Next ->",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "Connect",
+        "payloadType": "str",
+        "topic": "",
+        "x": 520,
+        "y": 180,
+        "wires": [
+            [
+                "9d8d43ca.1a4bd"
+            ]
+        ]
+    },
+    {
+        "id": "9d8d43ca.1a4bd",
+        "type": "ui_ui_control",
+        "z": "c4b5a3e8.831b48",
+        "name": "",
+        "x": 680,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "87ad1e0d.63a1b",
+        "type": "ui_text",
+        "z": "c4b5a3e8.831b48",
+        "group": "f1fc6b23.c76cf",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Open bowser and navigateto http://raspberrypi.local:1880/ui/#/2",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 330,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "81f3d7a8.6d166",
+        "type": "ui_template",
+        "z": "c4b5a3e8.831b48",
+        "group": "29eaea85.51c1f6",
+        "name": "",
+        "order": 2,
+        "width": "15",
+        "height": "6",
+        "format": "<div ng-bind-html=\"msg.payload\"></div>\n<style>\n  @import url(https://fonts.googleapis.com/css?family=Lato:100,400);\n\nbody{\n  margin: 0;\n  padding: 0;\n  background: #459BF9;\n}\n\n.box{\n  width: 24px;\n  height: 15px;\n  position: absolute;\n  top: calc(50% - 25px);\n  top: -webkit-calc(50% - 25px);\n  left: calc(50% - 120px);\n  left: -webkit-calc(50% - 120px);\n}\n\n.text{\n  font-family: 'Lato', sans-serif;\n  color: #fff;\n  font-weight: 300;\n  font-size: 45px;\n  position: absolute;\n  top: calc(50% - 105px);\n  top: -webkit-calc(50% - 105px);\n  left: calc(50% - 160px);\n  left: -webkit-calc(50% - 160px);\n  oapcity: 1;\n  -webkit-animation: fade-in-out 2.5s infinite; \n  -moz-animation: fade-in-out 2.5s infinite; \n  -o-animation: fade-in-out 2.5s infinite; \n  animation: fade-in-out 2.5s infinite; \n}\n\n.comp{\n  position: absolute;\n  top: 0px;\n  width: 80px;\n  height: 55px;\n  border: 3px solid #fff;\n  border-radius: 5px;\n}\n\n.comp:after{\n  content: '';\n  position: absolute;\n  z-index: 5;\n  top: 19px;\n  left: 5px;\n  width: 65px;\n  height: 10px;\n  border-radius: 360px;\n  border: 3px solid #fff;\n}\n\n.loader{\n  position: absolute;\n  z-index: 5;\n  top: 26px;\n  left: 12px;\n  width: 8px;\n  height: 8px;\n  border-radius: 360px;\n  background: #fff;\n  -webkit-animation: loader 5s infinite linear 0.5s;\n  -moz-animation: loader 5s infinite linear 0.5s;\n  -o-animation: loader 5s infinite linear 0.5s;\n  animation: loader 5s infinite linear 0.5s;\n}\n\n.con{\n  position: absolute;\n  top: 28px;\n  left: 85px;\n  width: 100px;\n  height: 3px;\n  background: #fff;\n}\n\n.byte{\n  position: absolute;\n  top: 25px;\n  left: 80px;\n  height: 9px;\n  width: 9px;\n  background: #fff;\n  border-radius: 360px;\n  z-index: 6;\n  opacity: 0;\n  -webkit-animation: byte_animate 5s infinite linear 0.5s;\n  -moz-animation: byte_animate 5s infinite linear 0.5s;\n  -o-animation: byte_animate 5s infinite linear 0.5s;\n  animation: byte_animate 5s infinite linear 0.5s;\n}\n\n.server{\n  position: absolute;\n  top: 22px;\n  left: 185px;\n  width: 35px;\n  height: 35px;\n  z-index: 1;\n  border: 3px solid #fff;\n  background: #459BF9;\n  border-radius: 360px;\n  -webkit-transform: rotateX(58deg);\n  -moz-transform: rotateX(58deg);\n  -o-transform: rotateX(58deg);\n  transform: rotateX(58deg);\n}\n\n.server:before{\n  content: '';\n  position: absolute;\n  top: -47px;\n  left: -3px;\n  width: 35px;\n  height: 35px;\n  z-index: 20;\n  border: 3px solid #fff;\n  background: #459BF9;\n  border-radius: 360px;\n}\n\n.server:after{\n  position: absolute;\n  top: -26px;\n  left: -3px;\n  border-left: 3px solid #fff;\n  border-right: 3px solid #fff;\n  width: 35px;\n  height: 40px;\n  z-index: 17;\n  background: #459BF9;\n  content: '';\n}\n\n/*Byte Animation*/\n@-webkit-keyframes byte_animate{\n  0%{\n    opacity: 0;\n    left: 80px;\n  }\n  4%{\n    opacity: 1;\n  }\n  46%{\n    opacity: 1;\n  }\n  50%{\n    opacity: 0;\n    left: 185px;\n  }\n  54%{\n    opacity: 1;\n  }\n  96%{\n    opacity: 1;\n  }\n  100%{\n    opacity: 0;\n    left: 80px;\n  }\n}\n\n@-moz-keyframes byte_animate{\n  0%{\n    opacity: 0;\n    left: 80px;\n  }\n  4%{\n    opacity: 1;\n  }\n  46%{\n    opacity: 1;\n  }\n  50%{\n    opacity: 0;\n    left: 185px;\n  }\n  54%{\n    opacity: 1;\n  }\n  96%{\n    opacity: 1;\n  }\n  100%{\n    opacity: 0;\n    left: 80px;\n  }\n}\n\n@-o-keyframes byte_animate{\n  0%{\n    opacity: 0;\n    left: 80px;\n  }\n  4%{\n    opacity: 1;\n  }\n  46%{\n    opacity: 1;\n  }\n  50%{\n    opacity: 0;\n    left: 185px;\n  }\n  54%{\n    opacity: 1;\n  }\n  96%{\n    opacity: 1;\n  }\n  100%{\n    opacity: 0;\n    left: 80px;\n  }\n}\n\n@keyframes byte_animate{\n  0%{\n    opacity: 0;\n    left: 80px;\n  }\n  4%{\n    opacity: 1;\n  }\n  46%{\n    opacity: 1;\n  }\n  50%{\n    opacity: 0;\n    left: 185px;\n  }\n  54%{\n    opacity: 1;\n  }\n  96%{\n    opacity: 1;\n  }\n  100%{\n    opacity: 0;\n    left: 80px;\n  }\n}\n\n/*LOADER*/\n@-webkit-keyframes loader{\n  0%{\n    width: 8px;\n  }\n  100%{\n    width: 63px;\n  }\n}\n\n@-moz-keyframes loader{\n  0%{\n    width: 8px;\n  }\n  100%{\n    width: 63px;\n  }\n}\n\n@-o-keyframes loader{\n  0%{\n    width: 8px;\n  }\n  100%{\n    width: 63px;\n  }\n}\n\n@keyframes loader{\n  0%{\n    width: 8px;\n  }\n  100%{\n    width: 63px;\n  }\n}\n\n\n/*FADE IN-OUT*/\n@-webkit-keyframes fade-in-out{\n  0%{\n    opacity: 1;\n  }\n  50%{\n    opacity: 0;\n  }\n  100%{\n    oapcity: 1;\n  }\n}\n\n@-moz-keyframes fade-in-out{\n  0%{\n    opacity: 1;\n  }\n  50%{\n    opacity: 0;\n  }\n  100%{\n    oapcity: 1;\n  }\n}\n\n@-o-keyframes fade-in-out{\n  0%{\n    opacity: 1;\n  }\n  50%{\n    opacity: 0;\n  }\n  100%{\n    oapcity: 1;\n  }\n}\n\n@keyframes fade-in-out{\n  0%{\n    opacity: 1;\n  }\n  50%{\n    opacity: 0;\n  }\n  100%{\n    oapcity: 1;\n  }\n}\n </style>\n<div class=\"text\">\n  Connect to ProjectWiFi\n</div>\n<div class=\"box\">\n  <div class=\"comp\"></div>\n  <div class=\"loader\"></div>\n  <div class=\"con\"></div>\n  <div class=\"byte\"></div>\n  <div class=\"server\"></div>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 680,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3cf1369a.074b12",
+        "type": "ui_text",
+        "z": "c4b5a3e8.831b48",
+        "group": "c2e8423f.0d0b98",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Welcom to Coin WiFi Press Next to Continue",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 270,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "e3be2f85.c7725",
+        "type": "ui_button",
+        "z": "c4b5a3e8.831b48",
+        "name": "",
+        "group": "29eaea85.51c1f6",
+        "order": 0,
+        "width": "4",
+        "height": "4",
+        "passthru": false,
+        "label": "Next ->",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "Coin",
+        "payloadType": "str",
+        "topic": "",
+        "x": 520,
+        "y": 380,
+        "wires": [
+            [
+                "9d8d43ca.1a4bd"
+            ]
+        ]
+    },
+    {
+        "id": "70f3b4cf.02405c",
+        "type": "ui_button",
+        "z": "c4b5a3e8.831b48",
+        "name": "",
+        "group": "f1fc6b23.c76cf",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "button",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "PhoneClient",
+        "payloadType": "str",
+        "topic": "",
+        "x": 350,
+        "y": 400,
+        "wires": [
+            [
+                "9d8d43ca.1a4bd"
+            ]
+        ]
+    },
+    {
+        "id": "9d7fe7aa.8d5b5",
+        "type": "ui_text_input",
+        "z": "c4b5a3e8.831b48",
+        "name": "",
+        "label": "Connection Dashboard",
+        "group": "b0863706.41b94",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "",
+        "x": 250,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "77d759e0.643098",
+        "type": "ui_template",
+        "z": "c4b5a3e8.831b48",
+        "group": "b0863706.41b94",
+        "name": "",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "format": "<div ng-bind-html=\"msg.payload\"></div>\n\n<style>\n  body{\n  background:#000;\n}\na{\n  font-family: 'Press Start 2P';\n  font-size: 25px;\n  color: #fff;\n  text-align: center;\n  position: absolute;\n  top: 50%;\n  cursor: pointer;\n  left: 50%;\n  transform: translate(-50%,-50%);\n  letter-spacing: 4px;\n  color: #6b3b6e;\n  text-shadow: 0 0 5px #ec41bf, 0 0 10px #8606b6, 0 0     15px #fff, 0 0 20px #921982, 0 0 25px #770067;\n  -webkit-text-fill-color: #F4ECFF;\n  -webkit-text-stroke-color: #C546F7;\n  -webkit-text-stroke-width: 0;\n  text-decoration:none;\n}\n\n.parpadea {\n\n  animation-name: parpadeo;\n  animation-duration: 3s;\n  animation-timing-function: linear;\n  animation-iteration-count: infinite;\n\n  -webkit-animation-name:parpadeo;\n  -webkit-animation-duration: 3s;\n  -webkit-animation-timing-function: linear;\n  -webkit-animation-iteration-count: infinite;\n}\n\n@-moz-keyframes parpadeo{\n  0% { opacity: 1; }\n  50% { opacity: 0; }\n  100% { opacity: 1; }\n}\n\n@-webkit-keyframes parpadeo {\n  0% { opacity: 1.0; }\n  50% { opacity: 0.0; }\n   100% { opacity: 1.0; }\n}\n\n@keyframes parpadeo {\n  0% { opacity: 1.0; }\n   50% { opacity: 0.0; }\n  100% { opacity: 1.0; }\n}\n\n  </style>\n<link href=\"https://fonts.googleapis.com/css?family=Press+Start+2P\" rel=\"stylesheet\"> \n<body>\n<a href=\"#\" class=\"parpadea\">Insert coin</a>\n</body>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 720,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5060e8a0.03b0c8",
+        "type": "ui_template",
+        "z": "c4b5a3e8.831b48",
+        "group": "f1fc6b23.c76cf",
+        "name": "",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "format": "<div ng-bind-html=\"msg.payload\"></div>\n<style>\n  body {\n    background-color: #76DAFF;\n}\n\n.browser {\n    background-color: #EBEBEB;\n    border-radius: 4px;\n    margin: 50px auto;\n    width: 650px;\n    height: 500px;\n    box-shadow: 0px 3px 30px 0px rgba(0, 0, 0, 0.2);\n    overflow: hidden;\n    display: flex;\n    flex-direction: column;\n}\n\n.browser-header {\n    flex-basis: auto;\n    height: 35px;\n    background: #ebebeb;\n    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ebebeb), color-stop(100%, #d9d9d9));\n    border-bottom: 1px solid #969696;\n    display: flex;\n}\n\n.browser-btns {\n    height: 35px;\n    display: inline-block;\n    padding: 0 10px;\n    line-height: 38px;\n    width: 55px;\n    flex-basis: auto;\n}\n\n.browser-btn {\n    width: 10px;\n    height: 10px;\n    border: 1px solid rgba(0, 0, 0, 0.15);\n    border-radius: 6px;\n    display: inline-block;\n    margin: 1px;\n}\n\n.browser-btn.close {\n    background-color: #FD615B;\n}\n\n.browser-btn.retract {\n    background-color: #FDBC40;\n}\n\n.browser-btn.expand {\n    background-color: #33C84A;\n}\n\n.tabs {\n    flex: 1;\n    margin: 0;\n    padding: 0;\n    list-style-type: none;\n    line-height: 35px;\n    max-height: 35px;\n    display: inline-block;\n    padding: 0 12px;\n}\n\n.tabs .tab {\n    color: #333;\n    float: left;\n    margin: 10px -10px 0;\n    border-top-right-radius: 25px 170px;\n    border-top-left-radius: 20px 90px;\n    padding: 0 30px 0 25px;\n    height: 170px;\n    background: #CBCCCC;\n    position: relative;\n    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);\n    width: 100px;\n    border: 1px solid #B4B4B4;\n    font-size: 11px;\n    font-family: Verdana, sans-serif;\n    line-height: 25px;\n    cursor: pointer;\n}\n\n.tabs .tab:before, .tabs .tab:after {\n    content: '';\n    background: transparent;\n    height: 20px;\n    width: 20px;\n    border-radius: 100%;\n    border-width: 10px;\n    top: 0px;\n    border-style: solid;\n    position: absolute;\n}\n\n.tabs .tab:before {\n    border-color: transparent #CBCCCC transparent transparent;\n    -webkit-transform: rotate(50deg);\n    left: -23px;\n}\n\n.tabs .tab:after {\n    border-color: transparent transparent transparent #CBCCCC;\n    -webkit-transform: rotate(-50deg);\n    right: -17px;\n}\n\n.tabs .tab .fa {\n    font-size: 13px;\n}\n\n.tabs .tab .fa.fa-apple {\n    color: #666;\n}\n\n.tabs .tab .close {\n    position: absolute;\n    right: 25px;\n    top: 0px;\n    display: inline-block;\n    color: #888;\n    margin-left: 5px;\n}\n\n.tabs .tab .close:after {\n    position: absolute;\n    content: '';\n    width: 139px;\n    display: block;\n    height: 1px;\n    background: #969696;\n    z-index: 3;\n    top: 24px;\n    right: -15px;\n    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.8);\n}\n\n.tabs .tab.active {\n    background: #EBEEEB;\n}\n\n.tabs .tab.active:before {\n    border-color: transparent #EBEEEB transparent transparent;\n    z-index: 2;\n}\n\n.tabs .tab.active:after {\n    border-color: transparent transparent transparent #EBEEEB;\n    z-index: 2;\n}\n\n.tabs .tab.active .close:after {\n    display: none;\n}\n\n.browser-bar {\n    flex-basis: auto;\n    height: 28px;\n    background: #EBEEEB;\n    z-index: 15;\n    padding: 6px;\n    border-bottom: 1px solid #aaa;\n    display: flex;\n}\n\n.browser-bar .button {\n    flex-basis: auto;\n    text-align: center;\n    font-size: 17px;\n    color: #6D6D6E;\n    padding: 3px;\n    display: inline-block;\n    width: 20px;\n    border: 1px solid #EBEEEB;\n}\n\n.browser-bar .button:not(.inactive):hover {\n    border: 1px solid #b4bfb4;\n    cursor: pointer;\n    border-radius: 3px;\n}\n\n.browser-bar .button.inactive {\n    opacity: 0.3;\n}\n\n.browser-bar .address {\n    flex: 1;\n    background: #fff;\n    border-radius: 3px;\n    margin: 0px 3px;\n    border: 1px solid #ccc;\n    padding: 5px;\n    font-size: 14px;\n    color: #555;\n}\n\n.page {\n    flex: 1;\n    background: white;\n    z-index: 10;\n    text-align: center;\n    overflow-y: auto;\n    position: relative;\n}\n\n.page h1 {\n    font-size: 3em;\n    font-family: 'Abril Fatface', cursive;\n    margin-bottom: 0;\n    color: rgba(255, 0, 0, 0.3);\n}\n\n.page h1 span {\n    color: rgba(255, 0, 0, 0.5);\n}\n\n.page h2 {\n    font-family: 'Roboto', sans-serif;\n    padding: 0;\n    margin: 0;\n    color: rgba(71, 207, 115, 0.8);\n}\n\n.page .lines {\n    padding: 30px;\n}\n\n.page .line {\n    background-color: #ededed;\n    height: 10px;\n    margin: 15px 0px;\n    border-radius: 3px;\n}\n\n  </style>\n<div class=\"browser\">\n  <div class=\"browser-header\">\n    <div class=\"browser-btns\">\n      <div class=\"browser-btn close\"></div>\n      <div class=\"browser-btn retract\"></div>\n      <div class=\"browser-btn expand\"></div>\n    </div>\n    <ul class=\"tabs\">\n      <li class=\"tab active\"><i class=\"fa fa-codepen\"></i> Active Tab<span class=\"close\">x</span></li>\n      <li class=\"tab\"><i class=\"fa fa-apple\"></i> Inactive Tab<span class=\"close\">x</span></li>\n    </ul>\n  </div>\n  <div class=\"browser-bar\">\n    <div class=\"button\"><i class=\"fa fa-arrow-left\"></i></div>\n    <div class=\"button inactive\"><i class=\"fa fa-arrow-right\"></i></div>\n    <div class=\"button\"><i class=\"fa fa-rotate-right\"></i></div>\n    <input class=\"address\" value=\"http://raspberrypi.local:1880/ui/#/2\" />\n    <div class=\"button\"><i class=\"fa fa-bars\"></i></div>\n  </div>\n  <div class=\"page\">\n    <h1><span>Project WiFi</span> PH</h1>\n    <h2>Get Started</h2>\n    <div class=\"lines\">\n      <div class=\"line\"></div>\n      <div class=\"line\"></div>\n      <div class=\"line\"></div>\n      <div class=\"line\"></div>\n      <div class=\"line\"></div>\n      <div class=\"line\"></div>\n      <div class=\"line\"></div>\n      <div class=\"line\"></div>\n      <div class=\"line\"></div>\n      <div class=\"line\"></div>\n      <div class=\"line\"></div>\n      <div class=\"line\"></div>\n      <div class=\"line\"></div>\n    </div>\n  </div>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 120,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3ba0446d.626494",
+        "type": "ui_template",
+        "z": "c4b5a3e8.831b48",
+        "group": "b0863706.41b94",
+        "name": "",
+        "order": 0,
+        "width": "21",
+        "height": "12",
+        "format": "<!-- View on Github \n-->\n<!-- https://juancabrera.github.io/radial-timer/\n-->\n<style>\n  @import \"compass/css3\";\nbody {\n  background-color: #2f3439;\n}\n.radialtimer {\n  width: 200px;\n  height: 200px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin: -100px 0 0 -100px;\n}\n.radialtimer .n {\n  position: absolute;\n  width: 200px;\n  height: 200px;\n  background: white;\n  border-radius: 50%;\n  text-align: center;\n  line-height: 200px;\n  font-family: \"Georgia\";\n  font-size: 70px;\n  color: #888;\n}\n.radialtimer .slice {\n  position: absolute;\n  width: 200px;\n  height: 200px;\n  clip: rect(0px, 200px, 200px, 100px);\n}\n.radialtimer .slice.nc {\n  clip: rect(auto, auto, auto, auto);\n}\n.radialtimer .slice .q {\n  position: absolute;\n  width: 170px;\n  height: 170px;\n  border: 16px white solid;\n  border-radius: 50%;\n  clip: rect(0px, 100px, 100px, 0px);\n  z-index: 2;\n}\n.radialtimer .slice .pie {\n  border: 15px #6bc967 solid;\n  position: absolute;\n  width: 170px;\n  height: 170px;\n  clip: rect(0px, 100px, 200px, 0px);\n  border-radius: 50%;\n  transition: all 1s linear;\n  z-index: 1;\n}\n\n  </style>\n<div class=\"radialtimer\" id=\"timer\" style=\"{{msg.payload}}\"></div>\n<script type=\"text/javascript\" src=\"//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js\"></script>\n<script>\n  function radialTimer() {\n\tvar self = this;\n\n\tthis.seconds = 0;\n\tthis.count = 0;\n\tthis.degrees = 0;\n\tthis.interval = null;\n\tthis.timerHTML = \"<div class='n'></div><div class='slice'><div class='q'></div><div class='pie r'></div><div class='pie l'></div></div>\";\n\tthis.timerContainer = null;\n\tthis.number = null;\n\tthis.slice = null;\n\tthis.pie = null;\n\tthis.pieRight = null;\n\tthis.pieLeft = null;\n\tthis.quarter = null;\n\n\tthis.init = function(e, s) {\n\t\tself.timerContainer = $(\"#\" + e);\n\t\tself.timerContainer.html(self.timerHTML);\n\t\t\n\t\tself.number = self.timerContainer.find(\".n\");\n\t\tself.slice = self.timerContainer.find(\".slice\");\n\t\tself.pie = self.timerContainer.find(\".pie\");\n\t\tself.pieRight = self.timerContainer.find(\".pie.r\");\n\t\tself.pieLeft = self.timerContainer.find(\".pie.l\");\n\t\tself.quarter = self.timerContainer.find(\".q\");\n\n\t\t// start timer\n\t\tself.start(s);\n\t}\n\n\tthis.start = function(s) {\n\t\tself.seconds = s;\n\t\tself.interval = window.setInterval(function () {\n\t\t\tself.number.html(self.seconds - self.count);\n\t\t\tself.count++;\n\n\t\t\tif (self.count > (self.seconds - 1)) clearInterval(self.interval);\n\n\t\t\tself.degrees = self.degrees + (360 / self.seconds);\n\t\t\tif (self.count >= (self.seconds / 2)) {\n\t\t\t\tself.slice.addClass(\"nc\");\n\t\t\t\tif (!self.slice.hasClass(\"mth\")) self.pieRight.css({\"transform\":\"rotate(180deg)\"});\n\t\t\t\tself.pieLeft.css({\"transform\":\"rotate(\" + self.degrees + \"deg)\"});\n\t\t\t\tself.slice.addClass(\"mth\");\n\t\t\t\tif (self.count >= (self.seconds * 0.75)) self.quarter.remove();\n\t\t\t} else {\n\t\t\t\tself.pie.css({\"transform\":\"rotate(\" + self.degrees + \"deg)\"});\n\t\t\t}\n\t\t}, 1000);\n\t}\n}\n\nvar Timer;\n\n$(document).ready(function() {\n\tTimer = new radialTimer();\n\n\tTimer.init(\"timer\", 50);\n});\n </script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 800,
+        "y": 500,
+        "wires": [
+            [
+                "63145142.13ae68"
+            ]
+        ]
+    },
+    {
+        "id": "4903df33.48dcc8",
+        "type": "inject",
+        "z": "c4b5a3e8.831b48",
+        "name": "",
+        "topic": "payload",
+        "payload": "display:none",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 560,
+        "y": 520,
+        "wires": [
+            [
+                "3ba0446d.626494"
+            ]
+        ]
+    },
+    {
+        "id": "63145142.13ae68",
+        "type": "debug",
+        "z": "c4b5a3e8.831b48",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 960,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "c4243357.197dd8",
+        "type": "inject",
+        "z": "c4b5a3e8.831b48",
+        "name": "",
+        "topic": "payload",
+        "payload": "display:inline",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 560,
+        "y": 580,
+        "wires": [
+            [
+                "3ba0446d.626494"
+            ]
+        ]
+    },
+    {
+        "id": "76e36f7e.948868",
+        "type": "function",
+        "z": "c4b5a3e8.831b48",
+        "name": "refresher",
+        "func": "\n    if(msg.payload==\"display:inline\"){\n        msg.payload=\"\";\n    }\n   if(msg.payload==\"display:none\"){\n        msg.payload=\"\";\n    }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 740,
+        "y": 300,
+        "wires": [
+            [
+                "9d8d43ca.1a4bd"
+            ]
+        ]
+    },
+    {
+        "id": "dfe9555c.80aee",
+        "type": "websocket-listener",
+        "z": "",
+        "path": "/ws/example",
+        "wholemsg": "false"
+    },
+    {
+        "id": "29eaea85.51c1f6",
+        "type": "ui_group",
+        "z": "",
+        "name": "Connect",
+        "tab": "e83da7b2.6ad1d8",
+        "order": 1,
+        "disp": true,
+        "width": "21",
+        "collapse": false
+    },
+    {
+        "id": "c2e8423f.0d0b98",
+        "type": "ui_group",
+        "z": "",
+        "name": "Home",
+        "tab": "e95f2c10.7c53d8",
+        "order": 1,
+        "disp": true,
+        "width": "21",
+        "collapse": false
+    },
+    {
+        "id": "f1fc6b23.c76cf",
+        "type": "ui_group",
+        "z": "",
+        "name": "Coin",
+        "tab": "bf811dd4.036858",
+        "order": 1,
+        "disp": true,
+        "width": "21",
+        "collapse": false
+    },
+    {
+        "id": "b0863706.41b94",
+        "type": "ui_group",
+        "z": "",
+        "name": "PhoneClient",
+        "tab": "6539ab72.1e2914",
+        "order": 1,
+        "disp": true,
+        "width": "21",
+        "collapse": false
+    },
+    {
+        "id": "e83da7b2.6ad1d8",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Connect",
+        "icon": "dashboard",
+        "order": 4
+    },
+    {
+        "id": "e95f2c10.7c53d8",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Dashboard",
+        "icon": "dashboard",
+        "order": 1
+    },
+    {
+        "id": "bf811dd4.036858",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Coin",
+        "icon": "dashboard",
+        "order": 2
+    },
+    {
+        "id": "6539ab72.1e2914",
+        "type": "ui_tab",
+        "z": "",
+        "name": "PhoneClient",
+        "icon": "dashboard",
+        "order": 3
+    }
+]
